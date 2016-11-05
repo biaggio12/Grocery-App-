@@ -34,3 +34,23 @@ md-list-item > button {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
 }
+.category {
+    padding:20px 10px 0px 10px;
+    width:150px;
+    height: 150px;
+    display: inline-block;
+    float: left;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}
+.category:hover {
+    -webkit-transform: scale(1.4);
+    border: 1px solid lightblue;
+}
+
+.category:first-child {
+    margin-left: 30px;
+}
+ul {
+    list-style-type: none;
+}

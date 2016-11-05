@@ -12,24 +12,18 @@
 <md-toolbar>
     <h1>Grocery List Application</h1>
 </md-toolbar>
-<div class="container" layout="row" flex>
+<div class="container" layout="row" flex ng-controller="ItemsCtrl">
     <md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp">
         <md-list>
-            <md-list-item>
+            <md-list-item ng-repeat="categories in categoriesObj">
                 <md-button>
-                    <md-icon md-svg-src="img/noun_75333_cc.svg" class="avatar"></md-icon>
-                    <h2>Broccoli</h2>
-                </md-button>
-            </md-list-item>
-            <md-list-item>
-                <md-button>
-                    <md-icon md-svg-src="img/noun_75334_cc.svg" class="avatar"></md-icon>
-                    <h2>Bananas</h2>
+                    <md-icon md-svg-src="{{ categories.img }}" class="avatar"></md-icon>
+                    <h2>{{ categories.name }}</h2>
                 </md-button>
             </md-list-item>
         </md-list>
     </md-sidenav>
-    <md-content id="content" class="lightgreen" flex ng-controller="ItemsCtrl">
+    <md-content id="content" class="lightgreen" flex >
         <md-input-container class="md-icon-float md-block"  layout="row" layout-align="center center" flex-offset="25" >
                 <label >What to add?</label>
                 <input flex="30" flex-order="1" ng-model="name" type="text">
@@ -46,15 +40,20 @@
         <md-input-container class="md-block" flex-gt-sm layout="row" layout-align="center center" flex-offset="25" >
             <label>Amount</label>
             <md-select flex="30" flex-order="1" ng-model="category">
-                <md-option ng-repeat="category in categories" value="{{category.abbrev}}">
+                <md-option ng-click="chooseThumb()" ng-repeat="category in categories" value="{{category.abbrev}}">
                     {{category.abbrev}}
                 </md-option>
             </md-select>
         </md-input-container>
-        {{name}} {{amount}} {{category}}
 
-        {{items}}
+        <md-list flex layout="row">
+            <md-list-item ng-click="chooseItem(categories.name)" ng-repeat="categories in categoriesObj" ng-model="thumb">
+                <img class="category" ng-src="{{categories.img}}">
+            </md-list-item>
+        </md-list>
 
+{{categories}}
+        {{thumb}}
 
     </md-content>
 </div>

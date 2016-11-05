@@ -6,7 +6,34 @@ angular.module('MyApp',['ngMaterial'])
         $scope.items = [
 
         ];
-        $scope.categories = ('Vegetables Fruits Chemistry Drinks Alcohol Bread ').split(' ').map(function(category){
+        $scope.categoriesObj = [
+            {
+            name:'Vegetables',
+            img:'img/noun_75334_cc.svg'
+            },
+            {
+                name:'Vegetables',
+                img:'img/noun_75333_cc.svg'
+            },
+            {
+                name:'Fruits',
+                img:'img/noun_75334_cc.svg'
+            },
+            {
+                name:'Chemistry',
+                img:'img/noun_75335_cc.svg'
+            },
+            {
+                name:'Drinks',
+                img:'img/noun_75336_cc.svg'
+            },
+            {
+                name:'Alcohol',
+                img:'img/noun_75337_cc.svg'
+            }
+        ]
+
+        $scope.categories = ('Vegetables Fruits Chemistry Drinks Alcohol Bread').split(' ').map(function(category){
             return {abbrev: category};
         })
 
@@ -18,5 +45,14 @@ angular.module('MyApp',['ngMaterial'])
                     category:category
                 }
             )
+        };
+        $scope.chooseItem = function(item){
+            $scope.category = item;
+        };
+        $scope.thumbClass = 'category';
+        $scope.chooseThumb = function(){
+            if($scope.thumbClass === category){
+                $scope.thumbClass = "category-chosen"
+            };
         };
     });
