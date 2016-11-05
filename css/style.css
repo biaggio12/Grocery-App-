@@ -1,0 +1,40 @@
+html,body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    height:100%;
+    margin:0;
+    padding: 0;
+}
+md-toolbar h3 {
+    margin:auto;
+    font-weight: 700;
+}
+
+md-list-item > button {
+    width:100%;
+    font-weight: 700;
+    text-align: left;
+}
+
+#content {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+}
+
+
+.avatar {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0px;
+    vertical-align: middle;
+    zoom: 1;
+    transform: translateZ(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+}
