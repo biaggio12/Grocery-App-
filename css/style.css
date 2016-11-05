@@ -15,18 +15,14 @@ md-list-item > button {
     font-weight: 700;
     text-align: left;
 }
-
-#content {
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 20px;
+.btn1 {
+    background-color: lightgreen;
 }
-
 
 .avatar {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 128px;
+    height: 128px;
     border-radius: 50%;
     border: 1px solid #ddd;
     display: inline-block;

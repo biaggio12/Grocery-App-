@@ -8,14 +8,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
 </head>
-<style>
-    .lightblue {
-        background-color: lightblue;
-    }
-    .lightgreen{
-        background-color: lightgreen;
-    }
-</style>
 <body ng-app="MyApp" layout="column">
 <md-toolbar>
     <h1>Grocery List Application</h1>
@@ -37,13 +29,33 @@
             </md-list-item>
         </md-list>
     </md-sidenav>
-    <md-content id="content" class="lightgreen" flex>
-        <md-input-container class="md-icon-float md-block" flex="30">
-            <!-- Use floating label instead of placeholder -->
-            <label>What to add?</label>
-                <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-                <input ng-model="user.name" type="text">
+    <md-content id="content" class="lightgreen" flex ng-controller="ItemsCtrl">
+        <md-input-container class="md-icon-float md-block"  layout="row" layout-align="center center" flex-offset="25" >
+                <label >What to add?</label>
+                <input flex="30" flex-order="1" ng-model="name" type="text">
+                <md-button flex="60" flex-order="2" md-no-ink class="md-primary btn1" ng-click="pushItem(name,amount,category)">Add Item to List</md-button>
         </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm layout="row" layout-align="center center" flex-offset="25" >
+            <label>Amount</label>
+            <md-select flex="30" flex-order="1" ng-model="amount">
+                <md-option ng-repeat="amount in amounts" value="{{amount.abbrev}}">
+                    {{amount.abbrev}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm layout="row" layout-align="center center" flex-offset="25" >
+            <label>Amount</label>
+            <md-select flex="30" flex-order="1" ng-model="category">
+                <md-option ng-repeat="category in categories" value="{{category.abbrev}}">
+                    {{category.abbrev}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        {{name}} {{amount}} {{category}}
+
+        {{items}}
+
+
     </md-content>
 </div>
 
@@ -56,11 +68,6 @@
 
 <!-- Angular Material Library -->
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-<script>
-    angular.module('MyApp',['ngMaterial'])
-            .run(function(){
-                console.log('MyApp is ready')
-            })
-</script>
+<script src="js/controllers/itemsCtrl.js"></script>
 </body>
 </html>
