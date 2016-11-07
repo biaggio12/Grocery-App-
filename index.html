@@ -3,60 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Grocery App</title>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
 </head>
-<body ng-app="MyApp" layout="column">
-<md-toolbar>
-    <h1>Grocery List Application</h1>
+<body ng-app="MyApp" ng-controller="ItemsCtrl" layout="column">
+<md-toolbar layout="row">
+    <h3 flex>Grocery List Application</h3>
 </md-toolbar>
-<div class="container" layout="row" flex ng-controller="ItemsCtrl">
-    <md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp">
+
+<div class="container" layout="row" flex>
+    <md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" class="md-sidenav-left md-whiteframe-4dp">
         <md-list>
             <md-list-item ng-repeat="categories in categoriesObj">
                 <md-button>
                     <md-icon md-svg-src="{{ categories.img }}" class="avatar"></md-icon>
-                    <h2>{{ categories.name }}</h2>
+                    <h4>{{ categories.name }}</h4>
                 </md-button>
             </md-list-item>
         </md-list>
     </md-sidenav>
-    <md-content id="content" class="lightgreen" flex >
-        <md-input-container class="md-icon-float md-block"  layout="row" layout-align="center center" flex-offset="25" >
-                <label >What to add?</label>
-                <input flex="30" flex-order="1" ng-model="name" type="text">
-                <md-button flex="60" flex-order="2" md-no-ink class="md-primary btn1" ng-click="pushItem(name,amount,category)">Add Item to List</md-button>
+    <md-content id="content" layout-margin>
+        <md-input-container class="md-block" flex-offset-gt-sm="33" flex-gt-sm="20">
+            <label >What to add?</label>
+            <input ng-model="name" type="text">
         </md-input-container>
-        <md-input-container class="md-block" flex-gt-sm layout="row" layout-align="center center" flex-offset="25" >
+        <md-input-container class="md-block" flex-offset-gt-sm="33" flex-gt-sm="20">
             <label>Amount</label>
-            <md-select flex="30" flex-order="1" ng-model="amount">
+            <md-select ng-model="amount">
                 <md-option ng-repeat="amount in amounts" value="{{amount.abbrev}}">
                     {{amount.abbrev}}
                 </md-option>
             </md-select>
         </md-input-container>
-        <md-input-container class="md-block" flex-gt-sm layout="row" layout-align="center center" flex-offset="25" >
-            <label>Amount</label>
-            <md-select flex="30" flex-order="1" ng-model="category">
-                <md-option ng-click="chooseThumb()" ng-repeat="category in categories" value="{{category.abbrev}}">
-                    {{category.abbrev}}
+        <md-input-container class="md-block" flex-offset-gt-sm="33" flex-gt-sm="20">
+            <label>Category</label>
+            <md-select ng-model="category">
+                <md-option ng-click="itemClicked($index)" ng-repeat="category in categoriesObj"
+                           value="{{category.name}}">
+                    {{category.name}}
                 </md-option>
             </md-select>
         </md-input-container>
-
-        <md-list flex layout="row">
-            <md-list-item ng-click="chooseItem(categories.name)" ng-repeat="categories in categoriesObj" ng-model="thumb">
-                <img class="category" ng-src="{{categories.img}}">
+        <md-list layout="row" layout-wrap >
+            <md-list-item flex="15" class="md-list-item-text" class="md-2-line md-avatar" ng-click="thumbClicked(thumb.name);itemClicked($index)"
+                          ng-repeat="thumb in categoriesObj" ng-model="thumb" layout-align="center center">
+                <div  layout="column">
+                        <img style="margin: 0;" ng-class="{ 'selected': $index == selectedIndex }" ng-src="{{thumb.img}}" alt="{{thumb.name}}">
+                        <h4 hide-xs>{{thumb.name}}</h4>
+                </div>
+            </md-list-item>
+            <h4>{{thumb.name}}</h4>
+        </md-list>
+        <md-button flex="30" ng-click="openLeftMenu()" class="md-raised">
+            Toggle Sidenav
+        </md-button>
+        <md-input-container class="md-block" flex-offset-gt-sm="33" flex-gt-sm="33">
+            <md-button  md-no-ink class="md-primary btn1"
+                        ng-click="pushItem(name,amount,category)">Add Item to List
+            </md-button>
+        </md-input-container>
+        <md-list layout="row" flex>
+            <md-list-item ng-repeat="list in items | limitTo: 10" ng-model="list-col-1">
+                {{list.name}}{{list.amount}}{{list.category}}
             </md-list-item>
         </md-list>
 
-{{categories}}
-        {{thumb}}
-
     </md-content>
+
 </div>
+
 
 <!-- Angular Material requires Angular.js Libraries -->
 <script src="lib/angular.min.js"></script>

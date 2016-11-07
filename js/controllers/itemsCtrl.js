@@ -1,5 +1,5 @@
 angular.module('MyApp',['ngMaterial'])
-    .controller('ItemsCtrl',function($scope){
+    .controller('ItemsCtrl',function($scope, $mdSidenav, $mdMedia ){
         $scope.amounts = ('1kg 2kg 3kg 4kg 5kg '+'1szt 2szt 3szt 4szt 5szt 6szt 7szt '+'1l 2l 3l 4l 5l').split(' ').map(function(amount){
             return {abbrev: amount};
         });
@@ -8,20 +8,28 @@ angular.module('MyApp',['ngMaterial'])
         ];
         $scope.categoriesObj = [
             {
-            name:'Vegetables',
-            img:'img/noun_75334_cc.svg'
-            },
-            {
-                name:'Vegetables',
-                img:'img/noun_75333_cc.svg'
+                name:'Warzywa',
+                img:'img/warzywa.svg'
             },
             {
                 name:'Fruits',
-                img:'img/noun_75334_cc.svg'
+                img:'img/owoce.svg'
             },
             {
-                name:'Chemistry',
-                img:'img/noun_75335_cc.svg'
+                name:'Bread',
+                img:'img/chleb.svg'
+            },
+            {
+                name:'Dairy',
+                img:'img/mleko.svg'
+            },
+            {
+                name:'Meat',
+                img:'img/mieso.svg'
+            },
+            {
+                name:'Spices',
+                img:'img/noun_75337_cc.svg'
             },
             {
                 name:'Drinks',
@@ -29,13 +37,26 @@ angular.module('MyApp',['ngMaterial'])
             },
             {
                 name:'Alcohol',
+                img:'img/alkohol.svg'
+            },
+            {
+                name:'Chemia',
+                img:'img/noun_75337_cc.svg'
+            },
+            {
+                name:'Toilet',
+                img:'img/noun_75337_cc.svg'
+            },
+            {
+                name:'Health',
+                img:'img/noun_75337_cc.svg'
+            },
+            {
+                name:'Animals',
                 img:'img/noun_75337_cc.svg'
             }
-        ]
+        ];
 
-        $scope.categories = ('Vegetables Fruits Chemistry Drinks Alcohol Bread').split(' ').map(function(category){
-            return {abbrev: category};
-        })
 
         $scope.pushItem = function(name,amount,category){
             $scope.items.push(
@@ -46,13 +67,21 @@ angular.module('MyApp',['ngMaterial'])
                 }
             )
         };
-        $scope.chooseItem = function(item){
+
+        $scope.selectItem = function (item){
             $scope.category = item;
+
         };
-        $scope.thumbClass = 'category';
-        $scope.chooseThumb = function(){
-            if($scope.thumbClass === category){
-                $scope.thumbClass = "category-chosen"
-            };
+        $scope.selectedIndex = -1; // Whatever the default selected index is, use -1 for no selection
+
+        $scope.itemClicked = function ($index) {
+            $scope.selectedIndex = $index;
         };
-    });
+        $scope.thumbClicked = function(name){
+            $scope.category = name;
+        };
+
+        $scope.openLeftMenu = function() {
+            $mdSidenav('left').toggle();
+        };
+});

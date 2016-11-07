@@ -54,3 +54,6 @@ md-list-item > button {
 ul {
     list-style-type: none;
 }
+.selected {
+    border: 3px solid #000;
+}

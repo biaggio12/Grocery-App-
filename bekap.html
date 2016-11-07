@@ -1,0 +1,33 @@
+<md-content id="content" class="lightgreen" flex >
+    <md-input-container class="md-icon-float md-block"  layout="row" layout-align="center center" flex-offset="25" >
+        <label >What to add?</label>
+        <input flex="30" flex-order="1" ng-model="name" type="text">
+        <md-button flex="60" flex-order="2" md-no-ink class="md-primary btn1" ng-click="pushItem(name,amount,category)">Add Item to List</md-button>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm layout="row" layout-align="center center" flex-offset="25" >
+        <label>Amount</label>
+        <md-select flex="30" flex-order="1" ng-model="amount">
+            <md-option ng-repeat="amount in amounts" value="{{amount.abbrev}}">
+                {{amount.abbrev}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm layout="row" layout-align="center center" flex-offset="25" >
+        <label>Amount</label>
+        <md-select flex="30" flex-order="1" ng-model="category">
+            <md-option  ng-click="itemClicked($index)" ng-repeat="category in categoriesObj" value="{{category.name}}">
+                {{category.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-list flex layout="row">
+        <md-list-item ng-click="itemClicked($index)" ng-repeat="categories in categoriesObj | limitTo:4" ng-model="category">
+            <img ng-class="{ 'selected': $index == selectedIndex }" class="category" ng-src="{{categories.img}}">
+        </md-list-item>
+    </md-list>
+
+    {{categories}}
+    {{thumb}}
+
+</md-content>
